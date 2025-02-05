@@ -1,12 +1,26 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { WeatherQuery } from './models/weather-query';
+import { WeatherService } from './services/weather.service';
+import { WeatherReport } from './models/weather-response';
+import { BriefingFormComponent } from './components/briefing-form/briefing-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommonModule, BriefingFormComponent],
 })
 export class AppComponent {
-  title = 'flight-weather-briefing';
+  reports: WeatherReport[] = [];
+
+  constructor(private weatherService: WeatherService) {}
+
+  onQuerySubmit(query: WeatherQuery) {
+    this.weatherService.queryWeather(query).subscribe(
+      (response) => (this.reports = response.result),
+      (error) => console.error('Error fetching weather data:', error),
+    );
+  }
 }

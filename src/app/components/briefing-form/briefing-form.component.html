@@ -1,1 +1,31 @@
-<p>briefing-form works!</p>
+<form [formGroup]="briefingForm" (ngSubmit)="onSubmit()" class="briefing-form">
+  <div class="form-group">
+    <label>Message Types:</label>
+    <div formGroupName="messageTypes" class="checkbox-group">
+      <div *ngFor="let type of reportTypes">
+        <label>
+          <input type="checkbox" [formControlName]="type" />
+          {{ type }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Airports:</label>
+    <input
+      type="text"
+      formControlName="airports"
+      placeholder="e.g. LKPR EGLL"
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Countries:</label>
+    <input type="text" formControlName="countries" placeholder="e.g. SQ CZ" />
+  </div>
+
+  <button type="submit" [disabled]="!briefingForm.valid">
+    Create Briefing
+  </button>
+</form>
