@@ -4,13 +4,14 @@ import { WeatherQuery } from './models/weather-query';
 import { WeatherService } from './services/weather.service';
 import { WeatherReport } from './models/weather-response';
 import { BriefingFormComponent } from './components/briefing-form/briefing-form.component';
+import { BriefingResultsComponent } from './components/briefing-results/briefing-results.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [CommonModule, BriefingFormComponent],
+  imports: [CommonModule, BriefingFormComponent, BriefingResultsComponent],
 })
 export class AppComponent {
   reports: WeatherReport[] = [];

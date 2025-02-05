@@ -1,1 +1,24 @@
-<p>briefing-results works!</p>
+<div class="results-container" *ngIf="reports.length">
+  <div
+    class="station-group"
+    *ngFor="let group of getGroupedReports() | keyvalue"
+  >
+    <h3>Station: {{ group.key }}</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Report Type</th>
+          <th>Report Time</th>
+          <th>Report</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of group.value">
+          <td>{{ report.queryType }}</td>
+          <td>{{ formatDateTime(report.reportTime) }}</td>
+          <td [innerHTML]="formatReportText(report.text)"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

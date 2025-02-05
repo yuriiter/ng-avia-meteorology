@@ -1,4 +1,5 @@
 <div class="container">
   <h1>Flight Weather Briefing</h1>
-  <app-briefing-form></app-briefing-form>
+  <app-briefing-form (submitQuery)="onQuerySubmit($event)"></app-briefing-form>
+  <app-briefing-results [reports]="reports"></app-briefing-results>
 </div>
