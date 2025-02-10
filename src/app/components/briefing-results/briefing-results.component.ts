@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeatherReport } from '../../models/weather-response';
 import { WeatherService } from '../../services/weather.service';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-briefing-results',
@@ -35,7 +36,7 @@ export class BriefingResultsComponent {
     });
   }
 
-  formatReportText(text: string): string {
+  formatReportText(text: string): SafeHtml {
     return this.weatherService.formatWeatherText(text);
   }
 }
