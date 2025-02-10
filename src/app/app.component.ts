@@ -20,8 +20,16 @@ export class AppComponent {
 
   onQuerySubmit(query: WeatherQuery) {
     this.weatherService.queryWeather(query).subscribe(
-      (response) => (this.reports = response.result),
-      (error) => console.error('Error fetching weather data:', error),
+      (response) => {
+        if (response.error) {
+          alert(response.error);
+          this.reports = [];
+        }
+        this.reports = response.result;
+      },
+      (error) => {
+        alert(error);
+      },
     );
   }
 }

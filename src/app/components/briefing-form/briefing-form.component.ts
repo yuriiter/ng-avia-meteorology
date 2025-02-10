@@ -54,7 +54,36 @@ export class BriefingFormComponent {
       const airports = formValue.airports.trim().split(/\s+/).filter(Boolean);
       const countries = formValue.countries.trim().split(/\s+/).filter(Boolean);
 
-      if (airports.length === 0 && countries.length === 0) {
+      const allAirportsValid = !airports.some(
+        (airportCode: string) =>
+          airportCode.length !== 4 || /[a-z]/.test(airportCode),
+      );
+      const allCountriesValid = !countries.some(
+        (countryCode: string) =>
+          countryCode.length !== 2 || /[a-z]/.test(countryCode),
+      );
+
+      const haveEitherAirportsOrCountries = !(
+        airports.length === 0 && countries.length === 0
+      );
+
+      if (
+        !(
+          haveEitherAirportsOrCountries &&
+          allCountriesValid &&
+          allAirportsValid
+        )
+      ) {
+        let message = 'Bad input: ';
+        if (!haveEitherAirportsOrCountries)
+          message += 'You must input at least one airport or country';
+
+        if (!allAirportsValid)
+          message += 'Airport code format is 4 uppercase letters and numbers; ';
+        if (!allCountriesValid)
+          message += 'Country code format is 2 uppercase letters';
+
+        alert(message);
         return;
       }
 
