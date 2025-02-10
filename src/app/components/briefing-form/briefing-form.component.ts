@@ -79,9 +79,10 @@ export class BriefingFormComponent {
           message += 'You must input at least one airport or country';
 
         if (!allAirportsValid)
-          message += 'Airport code format is 4 uppercase letters and numbers; ';
+          message +=
+            'Airport code format must be 4 uppercase letters and numbers; ';
         if (!allCountriesValid)
-          message += 'Country code format is 2 uppercase letters';
+          message += 'Country code format must be 2 uppercase letters';
 
         alert(message);
         return;
